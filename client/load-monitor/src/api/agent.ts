@@ -34,6 +34,10 @@ const requests = {
 
 const Loads = {
   current: (): Promise<Load> => requests.get("/loads/current"),
+  list: (start?: number, end: number = Date.now()): Promise<Load[]> => {
+    const query = start ? `?start=${start}&end=${end}` : "";
+    return requests.get("/loads/list" + query);
+  },
 };
 
 export default Loads;
