@@ -1,3 +1,4 @@
+import HighLoadMonitor from "components/HighLoadMonitor";
 import LoadContextPovider from "context/loadContext";
 import "./App.css";
 import CurrentLoad from "./components/CurrentLoad";
@@ -10,6 +11,7 @@ const App = () => {
         <header className="App-header">
           <CurrentLoad />
           <Graph title="Five minute average" />
+          <HighLoadMonitor />
         </header>
       </LoadContextPovider>
     </div>
