@@ -1,29 +1,10 @@
-import Loads from "api/agent";
-import { Load } from "models/load";
-import { useEffect, useState } from "react";
-import useInterval from "hooks/useInterval";
-
-const defaultLoad: Load = {
-  normalized: [0],
-  timestamp: 0,
-  cpus: [[0]],
-};
+import { useContext } from "react";
+import { LoadContext } from "context/loadContext";
 
 const CurrentLoad = () => {
-  const [load, setLoad] = useState(defaultLoad);
+  const loads = useContext(LoadContext);
 
-  const getLoads = async () => {
-    const loads = await Loads.current();
-    loads && setLoad(loads);
-  };
-  useEffect(() => {
-    getLoads();
-  }, []);
-  useInterval(() => {
-    getLoads();
-  });
-
-  const currentLoad = load.normalized[0];
+  const currentLoad = loads[loads.length - 1].normalized[0];
 
   return <div>{currentLoad}</div>;
 };
