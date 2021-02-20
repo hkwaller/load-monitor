@@ -3,7 +3,7 @@ import LoadContextPovider from "context/loadContext";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
 import CurrentLoad from "./components/CurrentLoad";
-import Graph from "./components/FiveMinuteGraph";
+import GraphComponent from "./components/graphComponent/GraphComponent";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const App = () => {
@@ -12,7 +12,7 @@ const App = () => {
       <LoadContextPovider>
         <header className="App-header">
           <CurrentLoad />
-          <Graph title="Five minute average" />
+          <GraphComponent />
           <HighLoadMonitor />
         </header>
       </LoadContextPovider>

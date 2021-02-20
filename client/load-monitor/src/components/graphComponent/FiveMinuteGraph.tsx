@@ -4,10 +4,10 @@ import { useContext } from "react";
 import { LoadContext } from "context/loadContext";
 
 interface Props {
-  title: string;
+  treshold: number;
 }
 
-const FiveMinuteGraph = ({ title }: Props) => {
+const FiveMinuteGraph = ({ treshold }: Props) => {
   const loads = useContext(LoadContext);
 
   const fiveMinuteValues = loads
@@ -16,7 +16,11 @@ const FiveMinuteGraph = ({ title }: Props) => {
 
   const options: Highcharts.Options = {
     title: {
-      text: title,
+      text: "Five Minute Average",
+    },
+    chart: {
+      borderRadius: 12,
+      shadow: true,
     },
     series: [
       {
