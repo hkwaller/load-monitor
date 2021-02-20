@@ -1,8 +1,10 @@
 import HighLoadMonitor from "components/HighLoadMonitor";
 import LoadContextPovider from "context/loadContext";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import CurrentLoad from "./components/CurrentLoad";
 import Graph from "./components/FiveMinuteGraph";
+import "react-toastify/dist/ReactToastify.min.css";
 
 const App = () => {
   return (
@@ -14,6 +16,7 @@ const App = () => {
           <HighLoadMonitor />
         </header>
       </LoadContextPovider>
+      <ToastContainer />
     </div>
   );
 };

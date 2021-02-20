@@ -26,7 +26,7 @@ The application should be able to answer the following questions:
 ### Extra goals
 
 - Turn all the default settings into user configurable parameter (poll interval, historical cpu load window, cpu overload threshold, event duration, etc)
-- Show cpu loads per core, along with the different clock times (check [here](./server/README.md#current-loads) for details) 
+- Show cpu loads per core, along with the different clock times (check [here](./server/README.md#current-loads) for details)
 - Export overload/recovery event list to a file
 
 ## Other requirements:
@@ -39,9 +39,16 @@ The application should be able to answer the following questions:
 ## Getting started
 
 Clone this repo (do **not** fork it on GitHub) and import to your own public repo:
+
 ```
 git clone -o upstream https://github.com/Exabel/cpu-loads.git
 cd cpu-loads
 git remote add origin <your repo>
 git push -u origin master
 ```
+
+## Getting started 2
+
+Install concurrently on root with 'npm install'
+Install server and client dependencies from project root with `npm run install`.  
+Run server and client from project root with `npm run start`

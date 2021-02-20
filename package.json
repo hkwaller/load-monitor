@@ -1,6 +1,9 @@
 {
-  "dependencies": {
-    "highcharts": "^9.0.1",
-    "highcharts-react-official": "^3.0.0"
+  "scripts": {
+    "install": "concurrently \"(cd server && yarn install)\" \"(cd client/load-monitor && yarn install)\" ",
+    "start": "concurrently \"npm run --prefix server start\" \"npm run --prefix client/load-monitor start\" "
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0"
   }
 }

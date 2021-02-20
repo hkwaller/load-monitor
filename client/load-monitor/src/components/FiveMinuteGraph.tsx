@@ -20,7 +20,7 @@ const FiveMinuteGraph = ({ title }: Props) => {
     },
     series: [
       {
-        type: "line",
+        type: "spline",
         name: "Past five minutes",
         data: fiveMinuteValues,
         color: "#25c225",

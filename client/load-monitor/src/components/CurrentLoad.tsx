@@ -4,9 +4,9 @@ import { LoadContext } from "context/loadContext";
 const CurrentLoad = () => {
   const loads = useContext(LoadContext);
 
-  const currentLoad = loads[loads.length - 1].normalized[0];
+  const currentLoad: string = loads[loads.length - 1].normalized[0].toFixed(2);
 
-  return <div>{currentLoad}</div>;
+  return <div>{`Current load: ${currentLoad}`}</div>;
 };
 
 export default CurrentLoad;

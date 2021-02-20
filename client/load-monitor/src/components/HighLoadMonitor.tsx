@@ -1,11 +1,13 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { LoadContext } from "context/loadContext";
 import { Load } from "models/load";
+import { toast, ToastOptions } from "react-toastify";
 
 type LoadState = "high" | "recovered" | "normal";
 
 export const formatHighLoad = (loads: Load[]): LoadState => {
-  const isHigh = (load: Load) => load.normalized[0] > 1;
+  const treshold = 1;
+  const isHigh = (load: Load) => load.normalized[0] > treshold;
 
   const currentState = isHigh(loads[loads.length - 1]);
 
@@ -18,7 +20,7 @@ export const formatHighLoad = (loads: Load[]): LoadState => {
 
   const timeAtCurrentState = getTimeAtCurrentState(loads, currentState);
 
-  const getText = (highLoad: boolean, time: number): LoadState => {
+  const getLoadDescription = (highLoad: boolean, time: number): LoadState => {
     const ticksPerMinute = 6;
     const timecap = 1; // I'm aware tresholds says 2 minutes, but introduction says one minute, and it's easier for testing.
     const tickCap = ticksPerMinute * timecap;
@@ -29,7 +31,10 @@ export const formatHighLoad = (loads: Load[]): LoadState => {
     return "normal";
   };
 
-  const loadState: LoadState = getText(currentState, timeAtCurrentState);
+  const loadState: LoadState = getLoadDescription(
+    currentState,
+    timeAtCurrentState
+  );
 
   return loadState;
 };
@@ -39,7 +44,24 @@ const HighLoadMonitor = () => {
 
   const loadState = formatHighLoad(loads);
 
-  return <div className={loadState}>{`Load is ${loadState}`}</div>;
+  useEffect(() => {
+    const toastOptions: ToastOptions = {
+      position: toast.POSITION.BOTTOM_CENTER,
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    };
+    if (loadState === "high") {
+      toast.error("🚨 Warning, CPU load is high! 🚨", toastOptions);
+    } else if (loadState === "recovered") {
+      toast.info("Phew.. CPU load has recovered.", toastOptions);
+    }
+  }, [loadState]);
+
+  return <></>;
 };
 
 export default HighLoadMonitor;
