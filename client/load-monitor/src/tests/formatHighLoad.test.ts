@@ -1,4 +1,4 @@
-import { formatHighLoad } from "components/HighLoadMonitor";
+import { formatHighLoad } from "components/graphComponent/HighLoadMonitor";
 import { Load } from "models/load";
 
 const highLoad: Load = {
@@ -76,17 +76,17 @@ const load5: Load[] = [
 ];
 
 test("load1 is never high and should be normal", () => {
-  expect(formatHighLoad(load1)).toBe("normal");
+  expect(formatHighLoad(load1, 1, 1)).toBe("normal");
 });
 test("load2 is high", () => {
-  expect(formatHighLoad(load2)).toBe("high");
+  expect(formatHighLoad(load2, 1, 1)).toBe("high");
 });
 test("load3 is normal, but has not been normal long enough to have recovered", () => {
-  expect(formatHighLoad(load3)).toBe("high");
+  expect(formatHighLoad(load3, 1, 1)).toBe("recovering");
 });
 test("load4 has recovered", () => {
-  expect(formatHighLoad(load4)).toBe("recovered");
+  expect(formatHighLoad(load4, 1, 1)).toBe("recovered");
 });
 test("load5 has not been high past the treshold", () => {
-  expect(formatHighLoad(load5)).toBe("normal");
+  expect(formatHighLoad(load5, 1, 1)).toBe("normal");
 });

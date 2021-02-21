@@ -1,0 +1,29 @@
+.graphComponent {
+  display: flex;
+  flex-direction: row;
+  min-height: 400px;
+}
+
+.inputContainer {
+  font-size: small;
+  background-color: white;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  box-shadow: 1px 1px 3px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.graphInput {
+  width: 40px;
+  margin-left: 20px;
+  border: #444444;
+}
+
+.graph {
+  border-radius: 8px;
+  box-shadow: 1px 1px 3px;
+}

@@ -20,7 +20,10 @@ const LoadContextPovider = ({ children }: Props) => {
   const [loads, setLoads] = useState([defaultLoad]);
 
   const getLoads = async () => {
-    const loads = await Loads.list(Date.now() - 5 * 60 * 1000);
+    const loads = await (await Loads.list(Date.now() - 5 * 60 * 1000)).filter(
+      (_, index) => index % 10 === 0
+    );
+
     loads && setLoads(loads);
   };
   useEffect(() => {

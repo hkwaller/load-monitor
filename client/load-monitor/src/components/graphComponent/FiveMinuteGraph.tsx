@@ -10,17 +10,17 @@ interface Props {
 const FiveMinuteGraph = ({ treshold }: Props) => {
   const loads = useContext(LoadContext);
 
-  const fiveMinuteValues = loads
-    .filter((_, index) => index % 10 === 0)
-    .map((load) => [load.timestamp, load.normalized[1]]);
+  const fiveMinuteValues = loads.map((load) => [
+    load.timestamp,
+    load.normalized[1],
+  ]);
 
   const options: Highcharts.Options = {
     title: {
       text: "Five Minute Average",
     },
     chart: {
-      borderRadius: 12,
-      shadow: true,
+      borderRadius: 8,
     },
     series: [
       {
@@ -28,9 +28,12 @@ const FiveMinuteGraph = ({ treshold }: Props) => {
         name: "Past five minutes",
         data: fiveMinuteValues,
         color: "#25c225",
+        marker: {
+          radius: 3,
+        },
         zones: [
           {
-            value: 1,
+            value: treshold,
             color: "#25c225",
           },
           {
@@ -48,11 +51,23 @@ const FiveMinuteGraph = ({ treshold }: Props) => {
     yAxis: [
       {
         title: { text: "Cpu Usage" },
+        plotLines: [
+          {
+            value: treshold,
+            label: { text: "Treshold" },
+            color: "#5ac291",
+            zIndex: 10,
+          },
+        ],
       },
     ],
   };
 
-  return <HighchartsReact highcharts={Highcharts} options={options} />;
+  return (
+    <div className="graph">
+      <HighchartsReact highcharts={Highcharts} options={options} />
+    </div>
+  );
 };
 
 export default FiveMinuteGraph;

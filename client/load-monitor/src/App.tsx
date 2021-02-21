@@ -1,4 +1,3 @@
-import HighLoadMonitor from "components/HighLoadMonitor";
 import LoadContextPovider from "context/loadContext";
 import { ToastContainer } from "react-toastify";
 import "./App.css";
@@ -13,10 +12,9 @@ const App = () => {
         <header className="App-header">
           <CurrentLoad />
           <GraphComponent />
-          <HighLoadMonitor />
         </header>
       </LoadContextPovider>
-      <ToastContainer />
+      <ToastContainer pauseOnFocusLoss={false} />
     </div>
   );
 };

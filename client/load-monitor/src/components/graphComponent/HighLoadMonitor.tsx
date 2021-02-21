@@ -3,10 +3,18 @@ import { LoadContext } from "context/loadContext";
 import { Load } from "models/load";
 import { toast, ToastOptions } from "react-toastify";
 
-type LoadState = "high" | "recovered" | "normal";
+type LoadState = "high" | "recovered" | "recovering" | "normal";
 
-export const formatHighLoad = (loads: Load[]): LoadState => {
-  const treshold = 1;
+interface Props {
+  treshold: number;
+  duration: number;
+}
+
+export const formatHighLoad = (
+  loads: Load[],
+  treshold: number,
+  duration: number
+): LoadState => {
   const isHigh = (load: Load) => load.normalized[0] > treshold;
 
   const currentState = isHigh(loads[loads.length - 1]);
@@ -22,12 +30,12 @@ export const formatHighLoad = (loads: Load[]): LoadState => {
 
   const getLoadDescription = (highLoad: boolean, time: number): LoadState => {
     const ticksPerMinute = 6;
-    const timecap = 1; // I'm aware tresholds says 2 minutes, but introduction says one minute, and it's easier for testing.
+    const timecap = duration;
     const tickCap = ticksPerMinute * timecap;
     if (time === -1) return "normal"; // There is a gotcha here, but if load is always high, isn't that actually normal?
     if (highLoad && time >= tickCap) return "high";
-    if (!highLoad && time < tickCap) return "high";
-    if (!highLoad && time > tickCap) return "recovered";
+    if (!highLoad && time < tickCap) return "recovering";
+    if (!highLoad && time >= tickCap) return "recovered";
     return "normal";
   };
 
@@ -39,10 +47,10 @@ export const formatHighLoad = (loads: Load[]): LoadState => {
   return loadState;
 };
 
-const HighLoadMonitor = () => {
+const HighLoadMonitor = ({ treshold, duration }: Props) => {
   const loads = useContext(LoadContext);
 
-  const loadState = formatHighLoad(loads);
+  const loadState = formatHighLoad(loads, treshold, duration);
 
   useEffect(() => {
     const toastOptions: ToastOptions = {
