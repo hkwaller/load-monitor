@@ -9,6 +9,13 @@ const App = () => {
   return (
     <div className="App">
       <LoadContextPovider>
+        {/* 
+          borde inte ha allt detta i header. Menar också att charten borde
+          vara centrerad i komponenten med settings på sidan av den
+
+          Här använder du också default klasserna som kom med CRA. Fint att
+          vara konsekvent i hela appen
+        */}
         <header className="App-header">
           <CurrentLoad />
           <GraphComponent />

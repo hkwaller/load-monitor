@@ -1,3 +1,6 @@
+// inget fan av att importera hela bibliotek, men här använder
+// man kanske alltid och med att man skickar in hela objektet
+// till React Highchartsen?
 import * as Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import { useContext } from "react";
@@ -12,9 +15,11 @@ const FiveMinuteGraph = ({ treshold }: Props) => {
 
   const fiveMinuteValues = loads.map((load) => [
     load.timestamp,
+    // är denna också safe?
     load.normalized[1],
   ]);
 
+  // Kan man runda av denna? Får fantastiskt många decimaler :)
   const options: Highcharts.Options = {
     title: {
       text: "Five Minute Average",

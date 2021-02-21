@@ -21,6 +21,8 @@ export const LoadContext: React.Context<{
 }> = createContext({
   loads: [defaultLoad],
   period: 5,
+  // du definerar en ny setPeriod under? kan vara jag som är rostig på Context men.
+  // och varför returnerar den tomt objekt och inte void?
   setPeriod: (arg0: number) => {},
 });
 
@@ -29,12 +31,19 @@ const LoadContextPovider = ({ children }: Props) => {
   const [period, setPeriod] = useState(5);
 
   const getLoads = async (period: number) => {
+    // tycker denna är lite svårläst. och behöver du verkligen await på
+    // await här?
+
+    // så har du en lokal state variabel som heter loads, då föredrar
+    // jag att inte återvända den i samma komponent
     const loads = await (
       await Loads.list(Date.now() - period * 60 * 1000)
     ).filter((_, index) => index % 10 === 0);
 
     loads && setLoads(loads);
   };
+
+  // lite mer spacing hade varit fint här 🕺
   useEffect(() => {
     getLoads(period);
   }, [period]);

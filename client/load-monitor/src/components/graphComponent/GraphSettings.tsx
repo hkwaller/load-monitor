@@ -3,6 +3,7 @@ import { useContext } from "react";
 
 interface Props {
   treshold: number;
+  // det stavas Threshold :)
   setTreshold: (value: number) => void;
   duration: number;
   setDuration: (value: number) => void;
@@ -16,6 +17,7 @@ export const GraphSettings = ({
 }: Props) => {
   const { period, setPeriod } = useContext(LoadContext);
   return (
+    // behöver du div här för layout eller håller ett fragment?
     <div>
       <div className="inputContainer">
         <label htmlFor="treshold">Treshold</label>
@@ -24,6 +26,8 @@ export const GraphSettings = ({
           name="treshold"
           className="graphInput"
           value={treshold}
+          // föredrar att ha siffror i {} hellre en strings även om string
+          // är helt lov här
           step="0.1"
           onChange={(event) =>
             setTreshold(parseFloat(event.currentTarget.value))

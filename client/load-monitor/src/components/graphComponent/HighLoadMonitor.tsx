@@ -1,8 +1,10 @@
 import { useContext, useEffect } from "react";
 import { LoadContext } from "context/loadContext";
 import { Load } from "models/load";
+// Smaksak, men jag föredrar npm/yarn-imports före egna moduler
 import { toast, ToastOptions } from "react-toastify";
 
+// Blandar type och interface. Gör väl ingenting, men varför? :D
 type LoadState = "high" | "recovered" | "recovering" | "normal";
 
 interface Props {
@@ -28,6 +30,7 @@ export const formatHighLoad = (
 
   const timeAtCurrentState = getTimeAtCurrentState(loads, currentState);
 
+  // flytta ut denna också?
   const getLoadDescription = (highLoad: boolean, time: number): LoadState => {
     const ticksPerMinute = 6;
     const timecap = duration;
@@ -53,6 +56,7 @@ const HighLoadMonitor = ({ treshold, duration }: Props) => {
   const loadState = formatHighLoad(loads, treshold, duration);
 
   useEffect(() => {
+    // kan väl flytta denna ut av komponenten?
     const toastOptions: ToastOptions = {
       position: toast.POSITION.BOTTOM_CENTER,
       autoClose: 5000,
@@ -69,6 +73,9 @@ const HighLoadMonitor = ({ treshold, duration }: Props) => {
     }
   }, [loadState]);
 
+  // kan den inte hellre returnera null? inte sett att bara
+  // returnera ett fragment förr så om det är ok så ska jag
+  // hålla käft
   return <></>;
 };
 
