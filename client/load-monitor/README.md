@@ -24,7 +24,16 @@ I chose to use context since Redux would be overkill, and a lot of components wi
 
 ### Future Improvements
 
-More parameters can easily be made available for graph settings, ~~like data period~~ (never mind, I did it instead).
+More parameters can easily be made available for graph settings, ~~like data period~~ (never mind, I did it instead), and polling interval.
+
+The current-load component should honestly be a part of the graph instead of a separate component, either as a visible-by-default tooltip, or as a part of the title.
+I should also format the mouseover tooltip a bit nicer for the user.
+
+A separate graph can be added for all CPU-cores to display percentage of non-idle time.
+
+There should probably also be some better error handling in the http agent, with customized toast notifications for different error codes and messages. Authentication could be added to the server to prevent unauthorized access to CPU data.
+
+I also think I should have added a stop button at some point, to stop the constant server polling.
 
 ## Available Scripts
 
