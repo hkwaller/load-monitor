@@ -1,3 +1,6 @@
+import { LoadContext } from "context/loadContext";
+import { useContext } from "react";
+
 interface Props {
   treshold: number;
   setTreshold: (value: number) => void;
@@ -11,6 +14,7 @@ export const GraphSettings = ({
   duration,
   setDuration,
 }: Props) => {
+  const { period, setPeriod } = useContext(LoadContext);
   return (
     <div>
       <div className="inputContainer">
@@ -37,6 +41,17 @@ export const GraphSettings = ({
           onChange={(event) =>
             setDuration(parseFloat(event.currentTarget.value))
           }
+        />
+      </div>
+      <div className="inputContainer">
+        <label htmlFor="duration">Graph period</label>
+        <input
+          type="number"
+          name="period"
+          className="graphInput"
+          value={period}
+          step="1"
+          onChange={(event) => setPeriod(parseFloat(event.currentTarget.value))}
         />
       </div>
     </div>

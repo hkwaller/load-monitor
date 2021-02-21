@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { LoadContext } from "context/loadContext";
 
 const CurrentLoad = () => {
-  const loads = useContext(LoadContext);
+  const { loads } = useContext(LoadContext);
 
   const currentLoad: string = loads[loads.length - 1].normalized[0].toFixed(2);
 

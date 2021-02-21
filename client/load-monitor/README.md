@@ -2,6 +2,30 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## What is this?
+
+This is an app that monitors the cpu loads received from the server.
+
+### Dependencies
+
+The project was made with the CRA Typescript template, because it's a quick, easy and well-known way of setting up a React app without the need for large amounts of boilerplate.  
+It includes dependencies like Babel, Webpack Eslint, Jest and Typescript.
+
+I use Axios mainly because I'm used to it, and since the focus of this app is not in learning fetch. Automatic json parsing is a plus, but could probably be easily solved with some boilerplate. Future exbandability is a bit simplified through interceptors, and built in XSRF protection is fine I guess.
+
+Highcharts is used for graphing because its a great graphing library, and Toastify is used for Notifications, since its simple, small and suits my needs.
+
+### Architecture
+
+The current application is basically a Highcharts chart, with some setting inputs and a separate component that monitors the load "category" ("High, "Recovered", etc.) and delivers a toast notification for certain categories.
+
+Load data is retrieved globally for the app at 10-second intervals and made available through LoadContext.
+I chose to use context since Redux would be overkill, and a lot of components will need the load data, at least in the extra goals.
+
+### Future Improvements
+
+More parameters can easily be made available for graph settings, ~~like data period~~ (never mind, I did it instead).
+
 ## Available Scripts
 
 In the project directory, you can run:

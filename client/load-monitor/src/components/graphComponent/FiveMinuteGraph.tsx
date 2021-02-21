@@ -8,7 +8,7 @@ interface Props {
 }
 
 const FiveMinuteGraph = ({ treshold }: Props) => {
-  const loads = useContext(LoadContext);
+  const { loads } = useContext(LoadContext);
 
   const fiveMinuteValues = loads.map((load) => [
     load.timestamp,

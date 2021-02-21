@@ -48,7 +48,7 @@ export const formatHighLoad = (
 };
 
 const HighLoadMonitor = ({ treshold, duration }: Props) => {
-  const loads = useContext(LoadContext);
+  const { loads } = useContext(LoadContext);
 
   const loadState = formatHighLoad(loads, treshold, duration);
 
